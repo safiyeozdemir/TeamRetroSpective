@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\RetroRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\OneToMany;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=RetroRepository::class)
@@ -24,7 +25,8 @@ class Retro
     private $retro_link;
 
     /**
-     * @ORM\Column(type="string", length=150)
+     * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank
      */
     private $retro_name;
 
@@ -33,6 +35,13 @@ class Retro
      * @ORM\OneToMany (targetEntity="Comment", mappedBy="retroid")
      */
     private $retrobrainstorm;
+
+    /**
+     * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank
+     */
+    private $team_name;
+
 
     public function getId(): ?int
     {
@@ -62,4 +71,21 @@ class Retro
 
         return $this;
     }
+
+    public function getTeamName(): ?string
+    {
+        return $this->team_name;
+    }
+
+    public function setTeamName(string $team_name): self
+    {
+        $this->team_name = $team_name;
+
+        return $this;
+    }
+
+
+
+
+
 }
