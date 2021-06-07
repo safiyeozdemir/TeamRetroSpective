@@ -6,8 +6,10 @@
  - AdminController
  
  
-![image](https://user-images.githubusercontent.com/60554068/120825461-15508f00-c562-11eb-88f8-b0014040a93a.png)
-![image](https://user-images.githubusercontent.com/60554068/120825595-35804e00-c562-11eb-9a56-a9e9f123e738.png)
+ ![image](https://user-images.githubusercontent.com/60554068/120999409-bec99780-c791-11eb-8bb2-151092518522.png)
+![image](https://user-images.githubusercontent.com/60554068/120940793-af156900-c727-11eb-9f42-2520597cda24.png)
+![image](https://user-images.githubusercontent.com/60554068/120940802-bb012b00-c727-11eb-99eb-fb04fed7e991.png)
+
 
  
  
