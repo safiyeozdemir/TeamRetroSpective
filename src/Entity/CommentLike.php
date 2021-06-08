@@ -17,19 +17,53 @@ class CommentLike
      * @ORM\Column(type="integer")
      */
     private $id;
+
     /**
      * @ORM\ManyToOne(targetEntity="Comment")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $commentid;
+    private $comment;
+
     /**
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $userid;
+    private $user;
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getComment()
+    {
+        return $this->comment;
+    }
+
+    /**
+     * @param mixed $comment
+     */
+    public function setComment($comment): void
+    {
+        $this->comment = $comment;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     */
+    public function setUser($user): void
+    {
+        $this->user = $user;
     }
 }

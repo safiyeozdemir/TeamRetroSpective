@@ -25,10 +25,9 @@ class User
     private $user_name;
 
     /**
-     * @ORM\OneToMany(targetEntity="BrainStorm", mappedBy="userid")
-     * @ORM\OneToMany(targetEntity="Comment", mappedBy="userid")
-     * @ORM\OneToMany(targetEntity="CommentLike", mappedBy="userid")
-     * @ORM\OneToMany(targetEntity="Discuss", mappedBy="userid")
+     * @ORM\OneToMany(targetEntity="BrainStorm", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="CommentLike", mappedBy="user")
      */
     private $userbrainstorm;
 

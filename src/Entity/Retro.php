@@ -31,8 +31,8 @@ class Retro
     private $retro_name;
 
     /**
-     * @ORM\OneToMany (targetEntity="BrainStorm", mappedBy="retroid")
-     * @ORM\OneToMany (targetEntity="Comment", mappedBy="retroid")
+     * @ORM\OneToMany (targetEntity="BrainStorm", mappedBy="retro")
+     * @ORM\OneToMany (targetEntity="Comment", mappedBy="retro")
      */
     private $retrobrainstorm;
 
@@ -83,9 +83,4 @@ class Retro
 
         return $this;
     }
-
-
-
-
-
 }

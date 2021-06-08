@@ -37,13 +37,13 @@ class BrainStorm
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $userid;
+    private $user;
 
     /**
      * @ORM\ManyToOne(targetEntity="Retro")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $retroid;
+    private $retro;
 
     public function getId(): ?int
     {
@@ -85,22 +85,36 @@ class BrainStorm
 
         return $this;
     }
-    public function getUserId(){
-        return $this->userid;
-    }
-    public function setUserId($userid):void{
-        $this->userid=$userid;
-    }
-    public function getRetroId(){
-        return $this->retroid;
-    }
-    public function setRetroId($retroid):void{
-        $this->retroid=$retroid;
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 
+    /**
+     * @param mixed $user
+     */
+    public function setUser($user): void
+    {
+        $this->user = $user;
+    }
 
+    /**
+     * @return mixed
+     */
+    public function getRetro()
+    {
+        return $this->retro;
+    }
 
-
-
-
+    /**
+     * @param mixed $retro
+     */
+    public function setRetro($retro): void
+    {
+        $this->retro = $retro;
+    }
 }

@@ -32,17 +32,20 @@ class Comment
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $userid;
+    private $user;
+
     /**
      * @ORM\ManyToOne(targetEntity="Retro")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $retroid;
+    private $retro;
+
     /**
-     * @ORM\OneToMany(targetEntity="CommentGroup", mappedBy="commentid")
-     * @ORM\OneToMany(targetEntity="CommentLike", mappedBy="commentid")
+     * @ORM\OneToMany(targetEntity="CommentGroup", mappedBy="comment")
+     * @ORM\OneToMany(targetEntity="CommentLike", mappedBy="comment")
      */
     private $commenttogroup;
+
     /**
      * @ORM\OneToMany(targetEntity="CommentGroup", mappedBy="commenttype")
      */
@@ -77,16 +80,36 @@ class Comment
 
         return $this;
     }
-    public function getUserId(){
-        return $this->userid;
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
-    public function setUserId($userid):void{
-        $this->userid=$userid;
+
+    /**
+     * @param mixed $user
+     */
+    public function setUser($user): void
+    {
+        $this->user = $user;
     }
-    public function getRetroId(){
-        return $this->retroid;
+
+    /**
+     * @return mixed
+     */
+    public function getRetro()
+    {
+        return $this->retro;
     }
-    public function setRetroId($retroid):void{
-        $this->retroid=$retroid;
+
+    /**
+     * @param mixed $retro
+     */
+    public function setRetro($retro): void
+    {
+        $this->retro = $retro;
     }
 }

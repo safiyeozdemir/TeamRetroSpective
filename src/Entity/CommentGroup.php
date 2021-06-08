@@ -23,17 +23,18 @@ class CommentGroup
      * @ORM\Column(type="string", length=255)
      */
     private $group_name;
+
     /**
      * @ORM\ManyToOne(targetEntity="Retro")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $retroid;
+    private $retro;
 
     /**
      * @ORM\ManyToOne(targetEntity="Comment")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $commentid;
+    private $comment;
 
     /**
      * @ORM\ManyToOne(targetEntity="Comment")
@@ -57,27 +58,37 @@ class CommentGroup
 
         return $this;
     }
-    public function getRetroId(){
-        return $this->retroid;
+
+    /**
+     * @return mixed
+     */
+    public function getRetro()
+    {
+        return $this->retro;
     }
-    public function setRetroId($retroid):void{
-        $this->retroid=$retroid;
+
+    /**
+     * @param mixed $retro
+     */
+    public function setRetro($retro): void
+    {
+        $this->retro = $retro;
     }
 
     /**
      * @return mixed
      */
-    public function getCommentid()
+    public function getComment()
     {
-        return $this->commentid;
+        return $this->comment;
     }
 
     /**
-     * @param mixed $commentid
+     * @param mixed $comment
      */
-    public function setCommentid($commentid): void
+    public function setComment($comment): void
     {
-        $this->commentid = $commentid;
+        $this->comment = $comment;
     }
 
     /**
@@ -95,14 +106,4 @@ class CommentGroup
     {
         $this->commenttype = $commenttype;
     }
-
-
-    /**
-     * @return mixed
-     */
-
-
-
-
-
 }

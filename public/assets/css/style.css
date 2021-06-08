@@ -1,6 +1,38 @@
 
-.bi bi-plus-lg {
-    position: relative;
+@import url("https://fonts.googleapis.com/css?family=Lato:300,400|PT+Sans:400,700");
+
+
+
+.container {
+    width: 90%;
+    max-width: 1160px;
+    margin: auto;
 }
 
-
+.form-input {
+    margin: 10px auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+input {
+    border: 2px solid #B0413E;
+    padding: 1px 10px 5px 50px;
+    font-size: 18px;
+    line-height: 30px;
+    outline: 0;
+    display: block;
+    width: 100%;
+}
+.icon {
+    position: absolute;
+    left: 10px;
+    top: 0;
+    font-size: 25px;
+    color: #DDDDDD;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
