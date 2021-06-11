@@ -12,7 +12,8 @@ retro için kayıt oluşturuldu.
   
   
  - Home
-  ![image](https://user-images.githubusercontent.com/60554068/121159352-ccdfec80-c853-11eb-9866-6417be22344e.png)
+  ![image](https://user-images.githubusercontent.com/60554068/121671090-d2893c80-cab6-11eb-8158-ff6a3aee26e2.png)
+
 
   
   
