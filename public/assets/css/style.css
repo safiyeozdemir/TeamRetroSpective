@@ -36,3 +36,232 @@ input {
     align-items: center;
     justify-content: center;
 }
+
+
+
+table{
+    display: inline-table;
+   /* table-layout: fixed; */
+    max-width: none;
+    border-collapse: collapse;
+    border-style: solid;
+    border-color: transparent;
+    margin-top: 4rem;
+    margin-bottom: 8rem;
+    width: 100%;
+}
+table tbody td, th, tr{
+    vertical-align: top;
+}
+table td, th{
+    padding: 15px;
+}
+.header-image{
+    width: 5em;
+    height: 5em;
+    margin-left: -.75em;
+    margin-bottom: .2em;
+    background-size: contain;
+}
+.header-title{
+    flex-negative: 1;
+    -ms-flex-negative: 1;
+    -moz-flex-negative: 1;
+    -webkit-flex-negative: 1;
+    flex-shrink: 1;
+    -ms-flex-shrink: 1;
+    -moz-flex-shrink: 1;
+    -webkit-flex-shrink: 1;
+    box-flex: 1;
+    -ms-box-flex: 1;
+    -moz-box-flex: 1;
+    -webkit-box-flex: 1;
+    flex-positive: 1;
+    -ms-flex-positive: 1;
+    -moz-flex-positive: 1;
+    -webkit-flex-positive: 1;
+    flex-grow: 1;
+    -ms-flex-grow: 1;
+    -moz-flex-grow: 1;
+    -webkit-flex-grow: 1;
+    flex-preferred-size: "auto";
+    -ms-flex-preferred-size: "auto";
+    -moz-flex-preferred-size: "auto";
+    -webkit-flex-preferred-size: "auto";
+    flex-basis: "auto";
+    -ms-flex-basis: "auto";
+    -moz-flex-basis: "auto";
+    -webkit-flex-basis: "auto";
+    -ms-flex: 1 1 "auto";
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    align-self: center;
+    -ms-align-self: center;
+    -moz-align-self: center;
+    -webkit-align-self: center;
+    flex-item-align: center;
+    -ms-flex-item-align: center;
+    -moz-flex-item-align: center;
+    -webkit-flex-item-align: center;
+    display: block;
+    font-weight: 400;
+    font-size: 1.3em;
+    line-height: 1.3em;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+    text-align: left;
+}
+
+.field-area{
+    box-shadow: 0 3px 6px rgb(69 90 100 / 8%), 0 3px 6px rgb(69 90 100 / 11%);
+    -ms-box-shadow: 0 3px 6px rgba(69,90,100,0.08),0 3px 6px rgba(69,90,100,0.11);
+    -moz-box-shadow: 0 3px 6px rgba(69,90,100,0.08),0 3px 6px rgba(69,90,100,0.11);
+    -webkit-box-shadow: 0 3px 6px rgb(69 90 100 / 8%), 0 3px 6px rgb(69 90 100 / 11%);
+    position: relative;
+    background: #fff;
+    color: #000;
+    border-radius: 4px;
+    -ms-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    position: relative;
+    z-index: 10;
+}
+.field-input{
+    text-align: left;
+    vertical-align: top;
+    display: block;
+    position: relative;
+    border: 0;
+    box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-shadow: none;
+    -ms-box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    height: auto;
+    min-height: 0;
+    color: inherit;
+    border-radius: 2px;
+    -ms-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    margin: 0;
+    outline: none;
+    outline-width: 0;
+    -webkit-touch-callout: text;
+    cursor: text;
+    resize: none;
+    user-select: text;
+    -ms-user-select: text;
+    -moz-user-select: text;
+    -webkit-user-select: text;
+    transition: background-color 100ms linear;
+    -ms-transition: background-color 100ms linear;
+    -moz-transition: background-color 100ms linear;
+    -webkit-transition: background-color 100ms linear;
+    resize: none;
+    overflow: hidden;
+    min-height: 1em;
+    height: 46px;
+    box-sizing: border-box;
+    background-color: #fffdeb;
+    padding: 1em 1.2em;
+    padding-left: 2.4em;
+    padding-right: 2.6em;
+    border-radius: 4px;
+    -ms-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    pointer-events: auto;
+    max-height: 10rem;
+    font-weight: 400;
+    cursor: text;
+    outline-color: #fffbd7;
+    display: block;
+    width: 100%;
+    padding: .6em 1rem;
+}
+.field-input:hover{
+    background-color: #fffbd7;
+    box-shadow: 0 0 0 2px rgb(0 184 212 / 15%);
+    -ms-box-shadow: 0 0 0 2px rgba(0,184,212,0.15);
+    -moz-box-shadow: 0 0 0 2px rgba(0,184,212,0.15);
+    -webkit-box-shadow: 0 0 0 2px rgb(0 184 212 / 15%);
+}
+.field-input:focus{
+    background-color: #fff59d;
+    box-shadow: 0 0 0 2px rgb(0 184 212 / 25%);
+    -ms-box-shadow: 0 0 0 2px rgba(0,184,212,0.25);
+    -moz-box-shadow: 0 0 0 2px rgba(0,184,212,0.25);
+    -webkit-box-shadow: 0 0 0 2px rgb(0 184 212 / 25%);
+}
+.topic-idea{
+    background-color: yellow;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: .75em;
+    border-radius: 4px;
+    -ms-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+}
+table tbody tr td:nth-child(1) .topic-idea{
+    background-color: rgb(183, 223, 185);
+}
+table tbody tr td:nth-child(2) .topic-idea{
+    background-color: rgb(251, 180, 175);
+}
+table tbody tr td:nth-child(3) .topic-idea{
+    background-color: rgb(166, 213, 250);
+}
+table tbody tr td:nth-child(4) .topic-idea{
+    background-color: rgb(255, 214, 153);
+}
+:root {
+    --animate-duration: 1s;
+    --animate-delay: 1s;
+    --animate-repeat: 1;
+}
+.animate__animated {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-duration: var(--animate-duration);
+    animation-duration: var(--animate-duration);
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+@-webkit-keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        -webkit-transform: translate3d(0, -100%, 0);
+        transform: translate3d(0, -100%, 0);
+    }
+    to {
+        opacity: 1;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+    }
+}
+@keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        -webkit-transform: translate3d(0, -100%, 0);
+        transform: translate3d(0, -100%, 0);
+    }
+    to {
+        opacity: 1;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+    }
+}
+.animate__fadeInDown {
+    -webkit-animation-name: fadeInDown;
+    animation-name: fadeInDown;
+}
