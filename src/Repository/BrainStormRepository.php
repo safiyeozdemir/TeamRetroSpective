@@ -5,23 +5,37 @@ namespace App\Repository;
 use App\Entity\BrainStorm;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\DBAL\Driver\Connection;
 
-/**
- * @method BrainStorm|null find($id, $lockMode = null, $lockVersion = null)
- * @method BrainStorm|null findOneBy(array $criteria, array $orderBy = null)
- * @method BrainStorm[]    findAll()
- * @method BrainStorm[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- */
 class BrainStormRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    private $conn;
+
+    public function __construct(ManagerRegistry $registry, Connection $conn)
     {
         parent::__construct($registry, BrainStorm::class);
+
+        $this->conn = $conn;
     }
 
     // /**
     //  * @return BrainStorm[] Returns an array of BrainStorm objects
     //  */
+
+    public function findAll($retroID = null)
+    {
+        $queryBuilder = $this->conn->createQueryBuilder();
+        $queryBuilder
+            ->select('*')
+            ->from('brain_storm')
+            ->andWhere('retro_id= :val')
+            ->setParameter('val',$retroID);
+
+        $storms = $queryBuilder->execute()->fetchAll();
+
+        return $storms;
+    }
+
     /*
     public function findByExampleField($value)
     {
