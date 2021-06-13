@@ -3,19 +3,26 @@
 namespace App\Repository;
 
 use App\Entity\BrainStorm;
+use App\Entity\User;
+use App\Entity\Retro;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\DBAL\Driver\Connection;
+use Doctrine\ORM\EntityManagerInterface;
 
 class BrainStormRepository extends ServiceEntityRepository
 {
     private $conn;
+    private $manager;
 
-    public function __construct(ManagerRegistry $registry, Connection $conn)
+    public function __construct(ManagerRegistry $registry,
+                                EntityManagerInterface $manager,
+                                Connection $conn)
     {
         parent::__construct($registry, BrainStorm::class);
 
         $this->conn = $conn;
+        $this->manager = $manager;
     }
 
     // /**

@@ -31,17 +31,5 @@ class HomeController extends AbstractController
 
 
     }
-     /*
-    #[Route('/home', name: 'home')]
-    public function show():Response
-    {
-        $em = $this->getDoctrine()->getManager();
-        $brain = $em->getRepository(BrainStorm::class)->findAll();
-        return $this->render('home/index.html.twig',[
-            "data" => $brain,
-        ]);
-    }
-*/
-
 
 }

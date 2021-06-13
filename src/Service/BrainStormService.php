@@ -22,14 +22,12 @@ class BrainStormService
 
         return $data;
     }
-/*
+
     public function addComment()
     {
-        $data = $this->getDoctrine()->getRepository(BrainStorm::class)->findAll();
-        return is_null($data) ? null : $data;
+
 
     }
-*/
 
 
 }
