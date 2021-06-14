@@ -1,6 +1,6 @@
 table{
     display: inline-table;
-   /* table-layout: fixed; */
+    /* table-layout: fixed; */
     max-width: none;
     border-collapse: collapse;
     border-style: solid;

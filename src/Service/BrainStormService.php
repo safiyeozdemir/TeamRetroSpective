@@ -3,31 +3,53 @@
 namespace App\Service;
 
 use App\Entity\BrainStorm;
+use App\Entity\Comment;
+use App\Repository\CommentRepository;
 use Doctrine\DBAL\Driver\Connection;
 use App\Repository\BrainStormRepository;
+use Doctrine\ORM\EntityManagerInterface;
 
 class BrainStormService
 {
-    private $brainStromRepository;
+    /**
+     * @var CommentRepository
+     */
+    private $commentRepository;
 
-    public function __construct(BrainStormRepository $brainStromRepository)
+    /**
+     * @var EntityManagerInterface
+     */
+    private $entityManager;
+
+
+    public function __construct(CommentRepository $commentRepository, EntityManagerInterface $entityManager)
     {
-        $this->brainStromRepository = $brainStromRepository;
+        $this->commentRepository = $commentRepository;
+        $this->entityManager = $entityManager;
     }
 
     public function findAll($retroID = null)
     {
 
-        $data = $this->brainStromRepository->findAll($retroID);
+        $data = $this->commentRepository->findBy(['retro' => $retroID,]);
 
         return $data;
     }
 
+    /*
     public function addComment()
     {
+        $comment = new Comment();
+        $comment->getCommentType();
+        $comment->setCommentText();
+        $comment->setCreatedAt(new \DateTime());
 
+
+        $this->entityManager->persist($comment);
+        $this->entityManager->flush();
 
     }
+    */
 
 
 }

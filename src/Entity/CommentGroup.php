@@ -4,8 +4,6 @@ namespace App\Entity;
 
 use App\Repository\CommentGroupRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\ManyToOne;
-use Doctrine\ORM\Mapping\OneToMany;
 
 /**
  * @ORM\Entity(repositoryClass=CommentGroupRepository::class)
@@ -20,27 +18,21 @@ class CommentGroup
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=60)
      */
-    private $group_name;
+    private $groupName;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Retro")
+     * @ORM\ManyToOne(targetEntity=Retro::class, inversedBy="commentGroups")
      * @ORM\JoinColumn(nullable=false)
      */
     private $retro;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Comment")
+     * @ORM\ManyToOne(targetEntity=Comment::class, inversedBy="commentGroups")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $comment;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Comment")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $commenttype;
+    private $commnetGroup;
 
     public function getId(): ?int
     {
@@ -49,61 +41,37 @@ class CommentGroup
 
     public function getGroupName(): ?string
     {
-        return $this->group_name;
+        return $this->groupName;
     }
 
-    public function setGroupName(string $group_name): self
+    public function setGroupName(string $groupName): self
     {
-        $this->group_name = $group_name;
+        $this->groupName = $groupName;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getRetro()
+    public function getRetro(): ?Retro
     {
         return $this->retro;
     }
 
-    /**
-     * @param mixed $retro
-     */
-    public function setRetro($retro): void
+    public function setRetro(?Retro $retro): self
     {
         $this->retro = $retro;
+
+        return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getComment()
+    public function getCommnetGroup(): ?Comment
     {
-        return $this->comment;
+        return $this->commnetGroup;
     }
 
-    /**
-     * @param mixed $comment
-     */
-    public function setComment($comment): void
+    public function setCommnetGroup(?Comment $commnetGroup): self
     {
-        $this->comment = $comment;
-    }
+        $this->commnetGroup = $commnetGroup;
 
-    /**
-     * @return mixed
-     */
-    public function getCommenttype()
-    {
-        return $this->commenttype;
-    }
-
-    /**
-     * @param mixed $commenttype
-     */
-    public function setCommenttype($commenttype): void
-    {
-        $this->commenttype = $commenttype;
+        return $this;
     }
 }

@@ -12,7 +12,17 @@ $(function () {
 
                 if(tbodyTd.data('topic-id') == $(this).data('topic-id'))
                 {
-                    tbodyTd.prepend('<section class="topic-idea animate__animated animate__fadeInDown">'+ $(this).val() + '</section>');
+                    $.ajax({
+                        url: '/home/comment',
+                        method: 'POST',
+                        dataType: "json",
+                        data: {'comment' : $(this).val(), 'commentType' : $(this).data('topic-id')},
+                        success: function(result){
+                            alert(result);
+                        }
+                    });
+
+                   // tbodyTd.prepend('<section class="topic-idea animate__animated animate__fadeInDown">'+ $(this).val() + '</section>');
 
                 }
             });

@@ -4,6 +4,8 @@ namespace App\Repository;
 
 use App\Entity\Comment;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\Driver\Connection;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -14,10 +16,33 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class CommentRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+
+    private $connection;
+    private $entityManager;
+
+
+    public function __construct(ManagerRegistry $registry,  EntityManagerInterface $entityManager, Connection $connection)
     {
         parent::__construct($registry, Comment::class);
+        $this->connection = $connection;
+        $this->entityManager =$entityManager;
     }
+
+    /*
+    public function show($retroID = NULL)
+    {
+        $queryBuilder = $this->connection->createQueryBuilder();
+        $queryBuilder
+            ->select('*')
+            ->from('comment')
+            ->andWhere('retro_id= :val')
+            ->setParameter('val',$retroID);
+
+        $storms = $queryBuilder->execute()->fetchAll();
+
+        return $storms;
+    }
+    */
 
     // /**
     //  * @return Comment[] Returns an array of Comment objects

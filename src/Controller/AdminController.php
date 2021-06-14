@@ -4,18 +4,20 @@ namespace App\Controller;
 
 use App\Entity\Retro;
 use App\Form\RetroType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Twig\Environment;
 
 class AdminController extends AbstractController
 {
-    #[Route('/admin', name: 'admin')]
-    public function show(Environment $twig,EntityManagerInterface $entityManager,Request $request){
+    /**
+     * @Route("/admin", name="admin")
+     */
+    public function show(Environment $twig,EntityManagerInterface $entityManager, Request $request)
+    {
         $retro = new Retro();
         $form = $this->createForm(RetroType::class, $retro);
         $form->handleRequest($request);
@@ -31,23 +33,4 @@ class AdminController extends AbstractController
             'retro_form'=>$form->createView()
         ]));
     }
-
-
-    /*
-    #[Route('/admin', name: 'admin')]
-    public function index(EntityManagerInterface $entityManager)
-    {
-        //Create a retro
-        $retro = new Retro();
-        //$retro->setRetroLink('https://google.com');
-        $retro->setRetroName();
-        //$entityManager->persist($retro);
-
-        //$entityManager->flush();
-
-       // return new Response("Userlar için link olusturuldu {$retro->getRetroLink()} toplantının adı {$retro->getRetroName()} olarak ayarlandı");
-         return $this->render('admin/index.html.twig');
-    }
-    */
-
 }

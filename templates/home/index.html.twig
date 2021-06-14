@@ -5,73 +5,80 @@
 {% block header %} {% include 'inc/header.html.twig' %} {% endblock %}
 
 {% block body %}
-<div class="container">
-    <table>
-        <thead>
-        <tr>
-            <th>
-                <header>
-                    <section class="header-image" style="background-image: url({{ asset('assets/img/happy.svg') }}"></section>
-                    <h2 class="header-title">What went well?</h2>
-                </header>
-                <p>Things we are happy about.</p>
-            </th>
-            <th>
-                <header>
-                    <section class="header-image" style="background-image: url({{ asset('assets/img/less.svg') }}"></section>
-                    <h2 class="header-title">What went less well?</h2>
-                </header>
-                <p>Things we should improve.</p>
-            </th>
-            <th>
-                <header>
-                    <section class="header-image" style="background-image: url({{ asset('assets/img/next.svg') }}"></section>
-                    <h2 class="header-title">What do we want to try?</h2>
-                </header>
-                <p>Things we should do differently.</p>
-            </th>
-        </tr>
-        <tr>
-            <td>
-                <div class="field-area">
-                    <textarea class="field-input" data-topic-id="happy"></textarea>
-                </div>
-            </td>
-            <td>
-                <div class="field-area">
-                    <textarea class="field-input" data-topic-id="less"></textarea>
-                </div>
-            </td>
-            <td>
-                <div class="field-area">
-                    <textarea class="field-input" data-topic-id="next"></textarea>
-                </div>
-            </td>
-        </tr>
+    <div class="container">
+        <table>
+            <thead>
+            <tr>
+                <th>
+                    <header>
+                        <section class="header-image" style="background-image: url({{ asset('assets/img/happy.svg') }}"></section>
+                        <h2 class="header-title">What went well?</h2>
+                    </header>
+                    <p>Things we are happy about.</p>
+                </th>
+                <th>
+                    <header>
+                        <section class="header-image" style="background-image: url({{ asset('assets/img/less.svg') }}"></section>
+                        <h2 class="header-title">What went less well?</h2>
+                    </header>
+                    <p>Things we should improve.</p>
+                </th>
+                <th>
+                    <header>
+                        <section class="header-image" style="background-image: url({{ asset('assets/img/next.svg') }}"></section>
+                        <h2 class="header-title">What do we want to try?</h2>
+                    </header>
+                    <p>Things we should do differently.</p>
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <div class="field-area">
+                        <textarea class="field-input" data-topic-id="1"></textarea>
+                    </div>
+                </td>
+                <td>
+                    <div class="field-area">
+                        <textarea class="field-input" data-topic-id="2"></textarea>
+                    </div>
+                </td>
+                <td>
+                    <div class="field-area">
+                        <textarea class="field-input" data-topic-id="3"></textarea>
+                    </div>
+                </td>
+            </tr>
 
-        </thead>
-        <tbody>
-        <tr>
-            <td class="ideas" data-topic-id="happy">
-                {% for item in data %}
-                    <section class="topic-idea">{{ item.user_happy }}</section>
-                {% endfor %}
-            </td>
-            <td class="ideas" data-topic-id="less">
-                {% for item in data %}
-                    <section class="topic-idea">{{ item.user_less }}</section>
-                {% endfor %}
-            </td>
-            <td class="ideas" data-topic-id="next">
-                {% for item in data %}
-                    <section class="topic-idea">{{ item.user_next }}</section>
-                {% endfor %}
-            </td>
-        </tr>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="ideas" data-topic-id="1">
+                    {% for item in data %}
+                        {% if item.commentType == 1 %}
+                        <section class="topic-idea"> {{ item.commentText }}
+                            </section>
+                        {% endif %}
+                    {% endfor %}
+                </td>
+                <td class="ideas" data-topic-id="2">
+                    {% for item in data %}
+                        {% if item.commentType == 2 %}
+                        <section class="topic-idea"> {{ item.commentText }} </section>
+                        {% endif %}
+                    {% endfor %}
+                </td>
+                <td class="ideas" data-topic-id="3">
+                    {% for item in data %}
+                        {% if item.commentType == 3 %}
+                        <section class="topic-idea"> {{ item.commentText }} </section>
+                        {% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+            </tbody>
+        </table>
 
-</div>
+    </div>
 
 {% endblock %}
 
