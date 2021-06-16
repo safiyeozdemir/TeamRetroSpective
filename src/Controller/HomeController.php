@@ -6,6 +6,8 @@ use App\Entity\Comment;
 use App\Entity\User;
 use App\Entity\Retro;
 use App\Service\BrainStormService;
+use App\Service\UserService;
+use App\Service\RetroService;
 use Doctrine\ORM\EntityManagerInterface;
 //use http\Env\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,12 +23,12 @@ class HomeController extends AbstractController
     private $entityManager;
 
     /**
-     * @Route("/home", name="home")
+     * @Route("/home", name="homepage")
      */
     public function index(BrainStormService $brainStormService)
     {
 
-        $comments = $brainStormService->findAll(1);
+        $comments = $brainStormService->findAll(2);
 
         //return new Response(json_encode($comments));
         return $this->render('home/index.html.twig', [
@@ -37,34 +39,26 @@ class HomeController extends AbstractController
 
     /**
      * @return Response
-     * @Route ("/home/comment", name="comment")
+     * @Route ("/home/comment", name="home_comment")
      */
-    public function addComment(Request $request, EntityManagerInterface $entityManager)
+    public function addComment(Request $request, RetroService $retroService, UserService  $userService, EntityManagerInterface $entityManager)
     {
 
-        //return new Response(json_encode($request->get('commentType')));
+        $user = $userService->find(3);
+        $retro = $retroService->find(2);
 
         $this->entityManager = $entityManager;
 
-
-
         $comment = new Comment();
         $comment->setCommentType($request->get('commentType'));
-        //$comment->setCommentType(3);
-        $comment->setRetro($request->get(2));
-        $comment->setCommentUser($request->get(2));
-
+        $comment->setRetro($retro);
+        $comment->setCommentUser($user);
         $comment->setCommentText($request->get('comment'));
         $comment->setCreatedAt(new \DateTime());
-
-
-
 
         $this->entityManager->persist($comment);
         $this->entityManager->flush();
 
-        return new Response($request->get('comment'));
-
-
+        return new Response(json_encode(['commentId' => $comment->getId(), 'comment' => $comment->getCommentText()]));
     }
 }

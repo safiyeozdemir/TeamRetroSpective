@@ -55,22 +55,21 @@
                 <td class="ideas" data-topic-id="1">
                     {% for item in data %}
                         {% if item.commentType == 1 %}
-                        <section class="topic-idea"> {{ item.commentText }}
-                            </section>
+                        <section class="topic-idea" data-comment="{{ item.id }}"> {{ item.commentText }} </section>
                         {% endif %}
                     {% endfor %}
                 </td>
                 <td class="ideas" data-topic-id="2">
                     {% for item in data %}
                         {% if item.commentType == 2 %}
-                        <section class="topic-idea"> {{ item.commentText }} </section>
+                        <section class="topic-idea" data-comment="{{ item.id }}"> {{ item.commentText }} </section>
                         {% endif %}
                     {% endfor %}
                 </td>
                 <td class="ideas" data-topic-id="3">
                     {% for item in data %}
                         {% if item.commentType == 3 %}
-                        <section class="topic-idea"> {{ item.commentText }} </section>
+                        <section class="topic-idea" data-comment="{{ item.id }}"> {{ item.commentText }} </section>
                         {% endif %}
                     {% endfor %}
                 </td>

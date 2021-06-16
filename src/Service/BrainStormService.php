@@ -31,25 +31,12 @@ class BrainStormService
     public function findAll($retroID = null)
     {
 
-        $data = $this->commentRepository->findBy(['retro' => $retroID,]);
+        $data = $this->commentRepository->findBy(['retro' => $retroID],['id' => 'DESC']);
 
         return $data;
     }
 
-    /*
-    public function addComment()
-    {
-        $comment = new Comment();
-        $comment->getCommentType();
-        $comment->setCommentText();
-        $comment->setCreatedAt(new \DateTime());
 
-
-        $this->entityManager->persist($comment);
-        $this->entityManager->flush();
-
-    }
-    */
 
 
 }

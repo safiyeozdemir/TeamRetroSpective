@@ -35,6 +35,17 @@ class User
      */
     private $commentLikes;
 
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $email;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $userLink;
+
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -117,4 +128,30 @@ class User
 
         return $this;
     }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(?string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getUserLink(): ?string
+    {
+        return $this->userLink;
+    }
+
+    public function setUserLink(?string $userLink): self
+    {
+        $this->userLink = $userLink;
+
+        return $this;
+    }
+
+
 }

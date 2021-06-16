@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create Your Organization{% endblock %}
+
+{% block header %}
+
+{% endblock %}
+
+{% block body %}
+    {{ form_start(form, {'action': path('retro_create')}) }}
+        <div class ="container">
+            <div class="column mt-5">
+                <div class="form-group">
+                    {{ form_row(form.retroName, {'label' : "RETRO NAME", 'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(form.teamName, {'label' : "TEAM NAME", 'attr': {'class': 'form-control'}}) }}
+                </div>
+                {{ form_row(form.create, { 'label': 'START RETROSPECTIVE',
+                                            'attr': {'class': 'btn btn-warning'}})
+                }}
+            </div>
+        </div>
+    {{ form_end(form) }}
+{% endblock %}

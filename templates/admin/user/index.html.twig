@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create Your Organization{% endblock %}
+
+{% block header %}
+
+{% endblock %}
+
+{% block body %}
+    {{ form_start(form, {'action': path('user_create')}) }}
+    <div class ="container">
+        <div class="column mt-5">
+            <div class="form-group">
+                {{ form_row(form.userName, {'label' : "USER NAME", 'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_row(form.email, {'label' : "EMAIL", 'attr': {'class': 'form-control'}}) }}
+            </div>
+            {{ form_row(form.create, { 'label': 'INVITE',
+                'attr': {'class': 'btn btn-success'}})
+            }}
+        </div>
+    </div>
+    {{ form_end(form) }}
+{% endblock %}
