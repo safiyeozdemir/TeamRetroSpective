@@ -51,9 +51,7 @@ class AccountController extends AbstractController
         $userForm = $this->createForm(RegisterType::class, $user);
         $userForm->handleRequest($request);
 
-        // Kullanıcıyı Veri tabanına kayıt yaptırmadan önce ilk olarak
-        // böyle bir kullanıcı var mı yok mu o kontrol edilmeli
-        // Bu aşamadan sonra veritabanına kayıt işlemi yapılmalı
+
 
         if($userForm->isSubmitted() && $userForm->isValid() )
         {
