@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block header %} {% include 'inc/header.html.twig' %} {% endblock %}
+{% block section %}
+
+    <section class="banner">
+        <div class="container">
+            <div class="col w-50p">
+                <h3 class="display-3">Agile retrospectives made easy</h3>
+                <p class="lead">TeamRetro is an enterprise-ready online retrospective tool for remote teams.
+                    Our guided retrospective techniques ensure your retros are worthwhile – each and every time.
+                </p>
+
+            </div>
+            <div class="col w-50p">
+                <div class="screen-frame">
+                    <img class="lazyload screen-frame__img" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-orig-src="https://mk0teamretrojjm4go5x.kinstacdn.com/wp-content/uploads/2018/06/ScreenFrame.png">
+                    <video class="screen-frame__video" autoplay loop playsinline muted
+                           poster="https://mk0teamretrojjm4go5x.kinstacdn.com/wp-content/uploads/2018/09/TeamRetroTour3Cover-1.jpg">
+                        <source
+                                src="https://mk0teamretrojjm4go5x.kinstacdn.com/wp-content/uploads/2018/09/TeamRetroTour3.webm"
+                                type="video/webm">
+                        <source
+                                src="https://mk0teamretrojjm4go5x.kinstacdn.com/wp-content/uploads/2018/09/TeamRetroTour3.mp4"
+                                type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block body %}
+
+{% endblock %}
+
+{% block footer %}
+    {% include 'inc/footer.html.twig' %}
+{% endblock %}

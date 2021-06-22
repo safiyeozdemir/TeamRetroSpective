@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create Your Organization{% endblock %}
+
+{% block header %}
+    <header>
+        <nav class="navbar navbar-light col-md-10 mx-auto navbar-expand-lg">
+            <a class="navbar-brand" href="/">
+                <img src="{{ asset('assets/img/TeamRetro.png') }}" alt="" width="200">
+            </a>
+
+            <p class="text-uppercase font-weight-bold"  style="font-size:50px" > Sıgn up page</p>
+
+        </nav>
+    </header>
+{% endblock %}
+
+{% block body %}
+    {{ form_start(form, {'action': path('account_register')}) }}
+    <div class ="container">
+        <div class="column mt-5">
+            <div class="form-group">
+                {{ form_row(form.userName, {'label' : "USER NAME", 'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_row(form.email, {'label' : "EMAIL", 'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_row(form.password, {'label' : "PASSWORD", 'attr': {'class': 'form-control'}}) }}
+            </div>
+
+            {{ form_row(form.register, { 'label': 'SIGN UP',
+                'attr': {'class': 'btn btn-success'}})
+            }}
+
+        </div>
+        <div class="container mt-5">
+            <a href="/login" >ALREADY HAVE AN ACCOUNT?</a>
+        </div>
+    </div>
+    {{ form_end(form) }}
+{% endblock %}

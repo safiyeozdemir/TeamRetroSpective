@@ -28,6 +28,22 @@
 {% block header %}{% endblock %}
 
 {% block section %}{% endblock %}
+
+<div class="container">
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-error">
+            {{ message }}
+        </div>
+    {% endfor %}
+</div>
+</body>
+
 {% block body %}{% endblock %}
 
 {% block footer %}{% endblock %}

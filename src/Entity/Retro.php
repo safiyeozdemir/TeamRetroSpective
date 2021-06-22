@@ -44,6 +44,32 @@ class Retro
      */
     private $commentGroups;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $start_date;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $end_date;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $cereatedAt;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $is_finished;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="retros")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -150,4 +176,72 @@ class Retro
 
         return $this;
     }
+
+    public function getStartDate(): ?\DateTimeInterface
+    {
+        return $this->start_date;
+    }
+
+    public function setStartDate(\DateTimeInterface $start_date): self
+    {
+        $this->start_date = $start_date;
+
+        return $this;
+    }
+
+    public function getEndDate(): ?\DateTimeInterface
+    {
+        return $this->end_date;
+    }
+
+    public function setEndDate(\DateTimeInterface $end_date): self
+    {
+        $this->end_date = $end_date;
+
+        return $this;
+    }
+
+    public function getCereatedAt(): ?\DateTimeInterface
+    {
+        return $this->cereatedAt;
+    }
+
+    public function setCereatedAt(\DateTimeInterface $cereatedAt): self
+    {
+        $this->cereatedAt = $cereatedAt;
+
+        return $this;
+    }
+
+    public function getIsFinished(): ?bool
+    {
+        return $this->is_finished;
+    }
+
+    public function setIsFinished(bool $is_finished): self
+    {
+        $this->is_finished = $is_finished;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     */
+    public function setUser($user): void
+    {
+        $this->user = $user;
+    }
+
+
+
+
 }

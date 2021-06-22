@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block header %} {% endblock %}
+{% block section %}
+
+{% endblock %}
+
+{% block body %}
+
+    {{ form_start(form, {'action': path('retro_create')}) }}
+    <div class ="container">
+        <div class="column mt-5">
+            <div class="form-group">
+                {{ form_row(form.retroName, {'label' : "RETRO NAME", 'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_row(form.teamName, {'label' : "TEAM NAME", 'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_row(form.start_date, {'label' : "Start Date", 'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_row(form.end_date, {'label' : "End Date", 'attr': {'class': 'form-control'}}) }}
+            </div>
+
+            {{ form_row(form.create, { 'label': 'Create ',
+                'attr': {'class': 'btn btn-primary'}})
+            }}
+        </div>
+    </div>
+    {{ form_end(form) }}
+
+
+
+
+
+{% endblock %}
+

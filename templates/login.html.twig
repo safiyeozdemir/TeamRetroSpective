@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create Your Organization{% endblock %}
+
+{% block header %}
+    <header>
+        <nav class="navbar navbar-light col-md-10 mx-auto navbar-expand-lg">
+            <a class="navbar-brand" href="/">
+                <img src="{{ asset('assets/img/TeamRetro.png') }}" alt="" width="200">
+            </a>
+
+            <p class="text-uppercase font-weight-bold"  style="font-size:50px" >Login  page</p>
+
+        </nav>
+    </header>
+{% endblock %}
+
+{% block body %}
+
+    {{ last_username }}
+
+    {{ form_start(form, {'action': path('app_login')}) }}
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+    <div class="container">
+        <div class="form-group">
+            {{ form_row(form.email, {'label' : "Email address", 'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_row(form.password, {'label' : "Password", 'attr': {'class': 'form-control'}}) }}
+        </div>
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
+        {{ form_row(form.login, { 'label': 'Login',
+            'attr': {'class': 'btn btn-primary'}})
+        }}
+
+    </div>
+    {{ form_end(form) }}
+
+{% endblock %}

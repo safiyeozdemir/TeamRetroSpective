@@ -21,4 +21,9 @@ class RetroService
     {
         return $this->retroRepository->find($retroId);
     }
+
+    public function findUserRetro($userId = null)
+    {
+        return $this->retroRepository->findBy(['user' => $userId]);
+    }
 }

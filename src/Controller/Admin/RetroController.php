@@ -26,7 +26,7 @@ class RetroController extends AbstractController
     }
 
     /**
-     * @Route("/admin/retro/create", name="retro_create")
+     * @Route("/admin/retro/create", name="admin_retro_create")
      */
     public function create(EntityManagerInterface $entityManager, Request $request) : Response
     {

@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block header %} {% endblock %}
+{% block section %}
+
+{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <a class="btn btn-outline-primary" href="/retro/create">Retro Create</a>
+    </div>
+
+    <div class="container">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Retro Name</th>
+                <th scope="col">Team Name</th>
+                <th scope="col">Start Date</th>
+                <th scope="col">End Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in data %}
+                <tr>
+                    <td>{{ item.retroName }}</td>
+                    <td>{{ item.teamName }}</td>
+                    <td>{{ item.startDate|date('d/m/Y') }}</td>
+                    <td>{{ item.endDate|date('d/m/Y') }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+

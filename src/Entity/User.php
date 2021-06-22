@@ -5,13 +5,15 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="`user`")
  */
-class User
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**
      * @ORM\Id
@@ -21,7 +23,7 @@ class User
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=30)
+     * @ORM\Column(type="string", length=30, unique=true)
      */
     private $userName;
 
@@ -31,25 +33,37 @@ class User
     private $comments;
 
     /**
-     * @ORM\OneToMany(targetEntity=CommentLike::class, mappedBy="likeUser")
-     */
-    private $commentLikes;
-
-    /**
-     * @ORM\Column(type="string", length=50, nullable=true)
+     * @ORM\Column(type="string", length=180, nullable=true, unique=true)
      */
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string")
      */
-    private $userLink;
+    private $password;
 
+    /**
+     * @var array
+     *
+     * @ORM\Column(type="json",nullable=true)
+     */
+    private $roles = [];
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Retro::class, mappedBy="user", orphanRemoval=true)
+     */
+    private $retros;
 
     public function __construct()
     {
         $this->comments = new ArrayCollection();
-        $this->commentLikes = new ArrayCollection();
+        $this->retros = new ArrayCollection();
+
     }
 
     public function getId(): ?int
@@ -67,6 +81,11 @@ class User
         $this->userName = $userName;
 
         return $this;
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return $this->username;
     }
 
     /**
@@ -99,36 +118,6 @@ class User
         return $this;
     }
 
-    /**
-     * @return Collection|CommentLike[]
-     */
-    public function getCommentLikes(): Collection
-    {
-        return $this->commentLikes;
-    }
-
-    public function addCommentLike(CommentLike $commentLike): self
-    {
-        if (!$this->commentLikes->contains($commentLike)) {
-            $this->commentLikes[] = $commentLike;
-            $commentLike->setLikeUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCommentLike(CommentLike $commentLike): self
-    {
-        if ($this->commentLikes->removeElement($commentLike)) {
-            // set the owning side to null (unless already changed)
-            if ($commentLike->getLikeUser() === $this) {
-                $commentLike->setLikeUser(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getEmail(): ?string
     {
         return $this->email;
@@ -141,16 +130,121 @@ class User
         return $this;
     }
 
-    public function getUserLink(): ?string
+    public function getPassword(): ?string
     {
-        return $this->userLink;
+        return $this->password;
     }
 
-    public function setUserLink(?string $userLink): self
+    public function setPassword(string $password): self
     {
-        $this->userLink = $userLink;
+        $this->password = $password;
 
         return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Retro[]
+     */
+    public function getRetros(): Collection
+    {
+        return $this->retros;
+    }
+
+    public function addRetro(Retro $retro): self
+    {
+        if (!$this->retros->contains($retro)) {
+            $this->retros[] = $retro;
+            $retro->setUserId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRetro(Retro $retro): self
+    {
+        if ($this->retros->removeElement($retro)) {
+            // set the owning side to null (unless already changed)
+            if ($retro->getUserId() === $this) {
+                $retro->setUserId(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * Returns the roles or permissions granted to the user for security.
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+
+        // guarantees that a user always has at least one role for security
+        if (empty($roles)) {
+            $roles[] = 'ROLE_USER';
+        }
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): void
+    {
+        $this->roles = $roles;
+    }
+
+    /**
+     * Returns the salt that was originally used to encode the password.
+     *
+     * {@inheritdoc}
+     */
+    public function getSalt(): ?string
+    {
+        // We're using bcrypt in security.yaml to encode the password, so
+        // the salt value is built-in and and you don't have to generate one
+        // See https://en.wikipedia.org/wiki/Bcrypt
+
+        return null;
+    }
+
+    /**
+     * Removes sensitive data from the user.
+     *
+     * {@inheritdoc}
+     */
+    public function eraseCredentials(): void
+    {
+        // if you had a plainPassword property, you'd nullify it here
+        // $this->plainPassword = null;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __serialize(): array
+    {
+        // add $this->salt too if you don't use Bcrypt or Argon2i
+        return [$this->id, $this->username, $this->password];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __unserialize(array $data): void
+    {
+        // add $this->salt too if you don't use Bcrypt or Argon2i
+        [$this->id, $this->username, $this->password] = $data;
     }
 
 
