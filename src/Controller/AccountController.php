@@ -6,6 +6,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\RegisterType;
 use App\Form\LoginType;
+use App\Security\LoginFormAuthenticator;
 use App\Service\UserService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -44,7 +45,7 @@ class AccountController extends AbstractController
     /**
      * @Route("/account/register", name="account_register")
      */
-    public function register(Request $request) : Response
+    public function register(Request $request): Response
     {
         $user = new User();
 

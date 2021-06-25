@@ -12,8 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="`user`")
+ * @method string getUserIdentifier()
  */
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+class User implements UserInterface
 {
     /**
      * @ORM\Id
@@ -83,10 +84,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getUserIdentifier(): string
-    {
-        return $this->username;
-    }
+
 
     /**
      * @return Collection|Comment[]
@@ -235,7 +233,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __serialize(): array
     {
         // add $this->salt too if you don't use Bcrypt or Argon2i
-        return [$this->id, $this->username, $this->password];
+        return [$this->id, $this->userName, $this->password];
     }
 
     /**
@@ -244,8 +242,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __unserialize(array $data): void
     {
         // add $this->salt too if you don't use Bcrypt or Argon2i
-        [$this->id, $this->username, $this->password] = $data;
+        [$this->id, $this->userName, $this->password] = $data;
     }
 
 
+    public function __call($name, $arguments)
+    {
+        // TODO: Implement @method string getUserIdentifier()
+    }
 }
