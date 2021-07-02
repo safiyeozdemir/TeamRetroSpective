@@ -45,4 +45,6 @@ security:
   # - { path: ^/admin, roles: ROLE_ADMIN }
   - { path: ^/retro, roles: ROLE_USER }
   - { path: ^/retro/create, roles: ROLE_USER }
- 
+  - { path: ^/home, roles: ROLE_USER }
+  - { path: ^/home/comment, roles: ROLE_USER }
+

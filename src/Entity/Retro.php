@@ -3,9 +3,12 @@
 namespace App\Entity;
 
 use App\Repository\RetroRepository;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use function Symfony\Component\String\u;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=RetroRepository::class)
@@ -45,11 +48,13 @@ class Retro
     private $commentGroups;
 
     /**
+     * @var DateTime
      * @ORM\Column(type="datetime")
      */
     private $start_date;
 
     /**
+     *  @var DateTime
      * @ORM\Column(type="datetime")
      */
     private $end_date;
@@ -70,10 +75,12 @@ class Retro
      */
     private $user;
 
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
         $this->commentGroups = new ArrayCollection();
+
     }
 
     public function getId(): ?int
@@ -177,24 +184,24 @@ class Retro
         return $this;
     }
 
-    public function getStartDate(): ?\DateTimeInterface
+    public function getStartDate(): ?DateTime
     {
         return $this->start_date;
     }
 
-    public function setStartDate(\DateTimeInterface $start_date): self
+    public function setStartDate(DateTime $start_date): self
     {
         $this->start_date = $start_date;
 
         return $this;
     }
 
-    public function getEndDate(): ?\DateTimeInterface
+    public function getEndDate(): ?DateTime
     {
         return $this->end_date;
     }
 
-    public function setEndDate(\DateTimeInterface $end_date): self
+    public function setEndDate(DateTime $end_date): self
     {
         $this->end_date = $end_date;
 
@@ -240,8 +247,6 @@ class Retro
     {
         $this->user = $user;
     }
-
-
 
 
 }

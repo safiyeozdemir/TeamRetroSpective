@@ -16,7 +16,7 @@ $(function () {
                    // tbodyTd.prepend('<section class="topic-idea animate__animated animate__fadeInDown">'+ $(this).val() + '</section>')
 
                     $.ajax({
-                        url: '/home/comment',
+                        url: '/comment/create',
                         method: 'POST',
                         dataType: "json",
                         data: {'comment' : $(this).val(), 'commentType' : $(this).data('topic-id')},

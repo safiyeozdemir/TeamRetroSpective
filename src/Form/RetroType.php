@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use function Sodium\add;
 
 class RetroType extends AbstractType
@@ -24,15 +25,13 @@ class RetroType extends AbstractType
             ->setMethod('POST')
             ->add('retroName', TextType::class)
             ->add('teamName', TextType::class)
-            ->add('start_date', DateType::class ,[
-            'widget' => 'single_text',
-            // this is actually the default format for single_text
-            'format' => 'yyyy-MM-dd',
-            ])
-            ->add('end_date', DateType::class,[
+            ->add('start_date',DateTimeType::class,[
                 'widget' => 'single_text',
-                // this is actually the default format for single_text
-                'format' => 'yyyy-MM-dd',
+                'html5'   => true
+            ])
+            ->add('end_date',DateTimeType::class,[
+                'widget' => 'single_text',
+                'html5'   => true
             ])
             ->add('create',SubmitType::class)
 

@@ -60,10 +60,13 @@ class User implements UserInterface
      */
     private $retros;
 
+
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
         $this->retros = new ArrayCollection();
+        $this->retroID = new ArrayCollection();
 
     }
 
@@ -164,7 +167,7 @@ class User implements UserInterface
     {
         if (!$this->retros->contains($retro)) {
             $this->retros[] = $retro;
-            $retro->setUserId($this);
+
         }
 
         return $this;
@@ -250,4 +253,6 @@ class User implements UserInterface
     {
         // TODO: Implement @method string getUserIdentifier()
     }
+
+
 }

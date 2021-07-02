@@ -26,4 +26,9 @@ class RetroService
     {
         return $this->retroRepository->findBy(['user' => $userId]);
     }
+
+    public function findRetroLink($link = null)
+    {
+        return $this->retroRepository->findOneBy(['retroLink' => $link]);
+    }
 }

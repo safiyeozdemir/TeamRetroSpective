@@ -2,67 +2,96 @@
 
 namespace App\Controller;
 
-use App\Entity\Comment;
+
+use App\Entity\Retro;
 use App\Service\BrainStormService;
-use App\Service\UserService;
-use App\Service\RetroService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\Security\Core\Security;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class HomeController extends AbstractController
 {
-
-
     /**
      * @var EntityManagerInterface
      */
     private $entityManager;
 
+    /**
+     * @var Security
+     */
+    private $security;
+
+
+
+    public function __construct(EntityManagerInterface $entityManager,
+                                Security $security
+    )
+    {
+        $this->entityManager = $entityManager;
+        $this->security = $security;
+    }
+
 
     /**
-     * @Route("/home", name="homepage")
+     * @Route("/")
      */
-
-
-    public function index(BrainStormService $brainStormService)
+    public function index()
     {
-
-        $comments = $brainStormService->findAll(2);
-
-        //return new Response(json_encode($comments));
-        return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
-            'data' => $comments,
+        return $this->render('index.html.twig', [
         ]);
     }
 
     /**
+     * @param $link
      * @return Response
-     * @Route ("/home/comment", name="home_comment")
+     * @Route ("/meeting/{link}", name="home_link")
      */
-
-    public function addComment(Request $request, RetroService $retroService, UserService  $userService, EntityManagerInterface $entityManager)
+    public function meeting($link, Request $request,BrainStormService $brainStormService):Response
     {
+        $em = $this->getDoctrine()->getManager();
 
-        $user = $userService->find(3);
-        $retro = $retroService->find(73);
+        $retroRepository = $em->getRepository(Retro::class);
 
-        $this->entityManager = $entityManager;
+        $retro_item = $retroRepository->findOneBy([
+            'retroLink'=>$link
+        ]);
 
-        $comment = new Comment();
-        $comment->setCommentType($request->get('commentType'));
-        $comment->setRetro($retro);
-        $comment->setCommentUser($user);
-        $comment->setCommentText($request->get('comment'));
-        $comment->setCreatedAt(new \DateTime());
 
-        $this->entityManager->persist($comment);
-        $this->entityManager->flush();
 
-        return new Response(json_encode(['commentId' => $comment->getId(), 'comment' => $comment->getCommentText()]));
+        if($retro_item )
+        {
+            date_default_timezone_set('Europe/Istanbul');
+
+            $currentDate = new \DateTime;
+
+            $startDate = new \DateTime($retro_item->getStartDate()->format("Y-m-d H:i:s"));
+            $endDate = new \DateTime($retro_item->getEndDate()->format("Y-m-d H:i:s"));
+
+            if(($currentDate >= $startDate) && ($currentDate <= $endDate))
+            {
+                $this->get('session')->set('meeting', $retro_item->getRetroLink());
+
+                $comments = $brainStormService->findAll($retro_item->getId());
+
+                return $this->render('home/index.html.twig', [
+                    'controller_name' => 'HomeController',
+                    'data' => $comments
+                ]);
+            }
+            else
+            {
+                return new Response('Katılmak istediğiniz RetroSpective toplantısının başlangı ve bitiş tarihleri arasında değilsiniz!');
+            }
+        }
+        else
+        {
+            return new Response('Yanlış link');
+        }
     }
 
 }

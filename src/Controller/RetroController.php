@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Retro;
+use App\Entity\User;
 use App\Form\RetroType;
 use App\Service\RetroService;
 use App\Service\UserService;
@@ -11,7 +12,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 class RetroController extends AbstractController
 {
@@ -31,24 +34,29 @@ class RetroController extends AbstractController
      */
     private $userService;
 
+    /**
+     * @var Security
+     */
+    private $security;
+
     public function __construct(EntityManagerInterface $entityManager,
                                 RetroService $retroService,
-                                UserService $userService
-
+                                UserService $userService,
+                                Security $security
     )
     {
         $this->entityManager = $entityManager;
         $this->retroService = $retroService;
         $this->userService = $userService;
+        $this->security = $security;
     }
-
 
     /**
      * @Route("/retro", name="retro")
      */
     public function index()
     {
-        $data = $this->retroService->findUserRetro(56);
+        $data = $this->retroService->findUserRetro($this->security->getUser()->getId());
 
         return $this->render('retro/list.html.twig',[
             'data' => $data
@@ -67,13 +75,11 @@ class RetroController extends AbstractController
 
         if($retroForm->isSubmitted() && $retroForm->isValid() )
         {
-            $user = $this->userService->find(56);
-
             $alpha_numeric = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-            $url_hash = substr( str_shuffle($alpha_numeric),0,20);
+            $url_hash = substr( str_shuffle($alpha_numeric),0,10);
 
             $retro->setRetroLink($url_hash);
-            $retro->setUser($user);
+            $retro->setUser($this->security->getUser());
             $retro->setCereatedAt(new \DateTime());
             $retro->setIsFinished(0);
 
