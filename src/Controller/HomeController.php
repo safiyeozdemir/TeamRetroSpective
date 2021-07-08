@@ -94,4 +94,14 @@ class HomeController extends AbstractController
         }
     }
 
+/*
+    public function control():Response
+    {
+        $retro= new Retro();
+
+        $uid = $retro->getUser();
+
+        if ($uid == )
+    }
+*/
 }

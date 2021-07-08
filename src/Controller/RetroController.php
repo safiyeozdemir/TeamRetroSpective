@@ -82,6 +82,7 @@ class RetroController extends AbstractController
             $retro->setUser($this->security->getUser());
             $retro->setCereatedAt(new \DateTime());
             $retro->setIsFinished(0);
+            $retro->setStep(0);
 
             $this->entityManager->persist($retro);
             $this->entityManager->flush();

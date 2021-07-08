@@ -75,6 +75,11 @@ class Retro
      */
     private $user;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $step;
+
 
     public function __construct()
     {
@@ -248,5 +253,15 @@ class Retro
         $this->user = $user;
     }
 
+    public function getStep(): ?int
+    {
+        return $this->step;
+    }
 
+    public function setStep(?int $step): self
+    {
+        $this->step = $step;
+
+        return $this;
+    }
 }

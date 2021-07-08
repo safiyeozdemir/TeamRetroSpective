@@ -51,9 +51,15 @@ class Comment
      */
     private $commentGroups;
 
+    /**
+     * @ORM\OneToMany(targetEntity=CommentLike::class, mappedBy="comment")
+     */
+    private $commentLikes;
+
     public function __construct()
     {
         $this->commentGroups = new ArrayCollection();
+        $this->commentLikes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -145,6 +151,36 @@ class Comment
             // set the owning side to null (unless already changed)
             if ($commentGroup->getCommnetGroup() === $this) {
                 $commentGroup->setCommnetGroup(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|CommentLike[]
+     */
+    public function getCommentLikes(): Collection
+    {
+        return $this->commentLikes;
+    }
+
+    public function addCommentLike(CommentLike $commentLike): self
+    {
+        if (!$this->commentLikes->contains($commentLike)) {
+            $this->commentLikes[] = $commentLike;
+            $commentLike->setComment($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentLike(CommentLike $commentLike): self
+    {
+        if ($this->commentLikes->removeElement($commentLike)) {
+            // set the owning side to null (unless already changed)
+            if ($commentLike->getComment() === $this) {
+                $commentLike->setComment(null);
             }
         }
 

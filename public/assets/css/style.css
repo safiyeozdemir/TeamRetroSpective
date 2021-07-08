@@ -160,15 +160,58 @@ table td, th{
     -moz-box-shadow: 0 0 0 2px rgba(0,184,212,0.25);
     -webkit-box-shadow: 0 0 0 2px rgb(0 184 212);
 }
+.idea-content{
+    position: relative;
+    cursor: grab;
+}
 .topic-idea{
     background-color: yellow;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    padding: .75em;
+    margin-top: 0px;
+    margin-bottom: 20px;
+    padding: 1.25em;
     border-radius: 4px;
     -ms-border-radius: 4px;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
+}
+.idea-action-btn{
+    display: block;
+    position: absolute;
+    opacity: 0;
+    bottom: 4px;
+    left: 1em;
+    transform: translateY(50%);
+    -ms-transform: translateY(50%);
+    -moz-transform: translateY(50%);
+    -webkit-transform: translateY(50%);
+    transition: opacity 300ms linear 0ms;
+    -ms-transition: opacity 300ms linear 0ms;
+    -moz-transition: opacity 300ms linear 0ms;
+    -webkit-transition: opacity 150ms linear 0ms;
+    font-size: 1.2em;
+    pointer-events: all;
+    padding: .25em;
+    margin-left: -.3em;
+    background-color: transparent;
+    border: none;
+    font-size: 22px;
+    box-shadow: none;
+    cursor: pointer;
+    z-index: 9999;
+    outline: none !important;
+}
+.idea-content:hover .idea-action-btn{
+    opacity: 1;
+}
+.idea-action-btn:hover,
+.idea-action-btn:focus{
+    color: #c12727;
+}
+.idea-action-btn.show{
+    opacity: 1;
+}
+span#count{
+    margin-left:7px;
 }
 table tbody tr td:nth-child(1) .topic-idea{
     background-color: rgb(183, 223, 185);
@@ -274,4 +317,24 @@ table tbody tr td:nth-child(4) .topic-idea{
 
 @media (min-width: 768px) {
     .footer-bs .footer-nav, .footer-bs .footer-social, .footer-bs .footer-ns { border-left:solid 1px rgba(255,255,255,0.10); }
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap");
+
+.like__btn {
+    padding: 10px 15px;
+    background: #0080ff;
+    font-size: 18px;
+    font-family: "Open Sans", sans-serif;
+    border-radius: 5px;
+    color: #e8efff;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+.btn-finish{
+    position: relative;
+    left: 970px;
+    top: 20px;
+
 }

@@ -25,13 +25,16 @@
             </thead>
             <tbody>
             {% for item in data %}
+                {% if item.step == 0 %}
                 <tr>
                     <td>{{ item.retroName }}</td>
                     <td>{{ item.teamName }}</td>
-                    <td><a href="/meeting/{{ item.retroLink }}"> {{ item.retroLink }}</a></td>
+                    <td><a href="/meeting/{{ item.retroLink }}"> {{ item.retroLink }} </a></td>
                     <td>{{ item.startDate|date('d/m/Y') }}</td>
                     <td>{{ item.endDate|date('d/m/Y') }}</td>
                 </tr>
+
+                {% endif %}
             {% endfor %}
             </tbody>
         </table>

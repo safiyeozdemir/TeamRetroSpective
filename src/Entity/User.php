@@ -60,6 +60,11 @@ class User implements UserInterface
      */
     private $retros;
 
+    /**
+     * @ORM\OneToMany(targetEntity=CommentLike::class, mappedBy="likeUser")
+     */
+    private $commentLikes;
+
 
 
     public function __construct()
@@ -253,6 +258,40 @@ class User implements UserInterface
     {
         // TODO: Implement @method string getUserIdentifier()
     }
+
+    /**
+     * @return mixed
+     */
+    public function getCommentLikes()
+    {
+        return $this->commentLikes;
+    }
+
+    /**
+     * @param mixed $commentLikes
+     */
+    public function setCommentLikes($commentLikes): void
+    {
+        $this->commentLikes = $commentLikes;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getRetroID(): ArrayCollection
+    {
+        return $this->retroID;
+    }
+
+    /**
+     * @param ArrayCollection $retroID
+     */
+    public function setRetroID(ArrayCollection $retroID): void
+    {
+        $this->retroID = $retroID;
+    }
+
+
 
 
 }

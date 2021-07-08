@@ -1,4 +1,4 @@
-$(function () {
+$(document).ready(function(){
 
     const tbodyTds = $('tbody tr td');
 
@@ -22,7 +22,11 @@ $(function () {
                         data: {'comment' : $(this).val(), 'commentType' : $(this).data('topic-id')},
                         success: function(response){
 
-                            tbodyTd.prepend('<section class="topic-idea animate__animated animate__fadeInDown" data-comment='+response['commentId']+'>'+response['comment']+'</section>');
+                            tbodyTd.prepend(
+                                '<div class="idea-content" data-comment='+response['commentId']+'>' +
+                                        '<section class="topic-idea animate__animated animate__fadeInDown">'+response['comment']+'</section> ' +
+                                        '<button class="idea-action-btn"><i class="far fa-thumbs-up"></i></button>' +
+                                    '</div>');
                             $('textarea').val('');
                         }
                     });
@@ -30,4 +34,50 @@ $(function () {
             });
         }
     });
+
+    $(".idea-content .idea-action-btn").click(function (e){
+
+        $.ajax({
+            url: '/comment/like',
+            method: 'POST',
+            dataType: "json",
+            data: {'comment' : $(this).parent().data('comment') },
+            success: function(response) {
+            }
+        });
+
+        $(this).attr('disabled', "disabled");
+
+
+    });
+
+    function actionAddClass(e)
+    {
+        $(e).addClass("show");
+    }
+
+
+
+
 });
+/*
+const likeBtn = document.querySelector(".idea-action-btn ");
+let likeIcon = document.querySelector("#icon"),
+    count = document.querySelector("#count");
+
+let clicked = false;
+
+/*
+likeBtn.addEventListener("click", () => {
+    if (!clicked) {
+        clicked = true;
+        likeIcon.innerHTML = `<i class="fas fa-thumbs-up"></i>`;
+        count.textContent++;
+    } else {
+        clicked = false;
+        likeIcon.innerHTML = `<i class="far fa-thumbs-up"></i>`;
+        count.textContent--;
+    }
+});
+
+ */
