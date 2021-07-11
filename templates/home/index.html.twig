@@ -6,8 +6,17 @@
 
 {% block body %}
     <div class="container">
+
+        {% for message in app.flashes('error') %}
+            <div class="alert alert-error">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+
+
         <div class="btn-finish">
-        <button type="button" class="btn btn-outline-danger">I'M FINISHED</button>
+        <button type="submit" class="btn btn-outline-danger" id="btn-finish">I'M FINISHED</button>
         </div>
         <table>
             <thead>

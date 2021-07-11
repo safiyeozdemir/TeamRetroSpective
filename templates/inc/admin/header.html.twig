@@ -1,17 +1,16 @@
 <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light ">
-        <a class="navbar-brand" href="/meeting/">BRAINSTORM</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse"
-                data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
-                aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
+    <nav id="navbar_top" class="navbar navbar-expand-lg navbar-light "  style="background-color: #e3f2fd;">
+        <div class="container">
+            <a class="navbar-brand mb-0 h1" href="/meeting/{{ app.session.get('meeting') }}">BRAINSTORM</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main_nav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="main_nav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item active"><a class="nav-link" href="#"><span class="sr-only">(current)</span> VOTE </a></li>
 
-                <a class="nav-link" href="#">VOTE</a>
-
-            </div>
-        </div>
+                </ul>
+            </div> <!-- navbar-collapse.// -->
+        </div> <!-- container-fluid.// -->
     </nav>
 </header>

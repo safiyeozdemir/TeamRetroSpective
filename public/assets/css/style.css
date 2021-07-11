@@ -5,9 +5,12 @@ table{
     border-collapse: collapse;
     border-style: solid;
     border-color: transparent;
-    margin-top: 4rem;
     margin-bottom: 8rem;
     width: 100%;
+}
+.table-title{
+    border-bottom: 1px solid rgb(0 0 0 / 34%);
+    padding-bottom: 10px;
 }
 table tbody td, th, tr{
     vertical-align: top;

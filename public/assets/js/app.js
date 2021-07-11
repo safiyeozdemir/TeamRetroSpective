@@ -1,5 +1,6 @@
 $(document).ready(function(){
 
+
     const tbodyTds = $('tbody tr td');
 
     $(".field-area textarea").keypress(function (e) {
@@ -57,9 +58,35 @@ $(document).ready(function(){
     }
 
 
+    $("#btn-finish").click(function (){
+        $.ajax({
+            url: '/comment/vote/control',
+            method: 'POST',
+            dataType: "json",
+            success: function(response) {
+
+
+            }
+        });
+    });
+
 
 
 });
+/*
+
+if(document.getElementById('btn-finish').clicked === true)
+{
+    alert("button was clicked");
+}
+*/
+
+/*
+document.getElementById('btn-finish').onclick = function() {
+    alert("button was clicked");
+}
+*/
+
 /*
 const likeBtn = document.querySelector(".idea-action-btn ");
 let likeIcon = document.querySelector("#icon"),

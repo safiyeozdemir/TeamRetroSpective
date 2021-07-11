@@ -65,6 +65,11 @@ class User implements UserInterface
      */
     private $commentLikes;
 
+    /**
+     * @ORM\OneToMany(targetEntity=RetroUser::class, mappedBy="user")
+     */
+    private $retroUsers;
+
 
 
     public function __construct()
@@ -72,6 +77,7 @@ class User implements UserInterface
         $this->comments = new ArrayCollection();
         $this->retros = new ArrayCollection();
         $this->retroID = new ArrayCollection();
+        $this->retroUsers = new ArrayCollection();
 
     }
 
@@ -289,6 +295,36 @@ class User implements UserInterface
     public function setRetroID(ArrayCollection $retroID): void
     {
         $this->retroID = $retroID;
+    }
+
+    /**
+     * @return Collection|RetroUser[]
+     */
+    public function getRetroUsers(): Collection
+    {
+        return $this->retroUsers;
+    }
+
+    public function addRetroUser(RetroUser $retroUser): self
+    {
+        if (!$this->retroUsers->contains($retroUser)) {
+            $this->retroUsers[] = $retroUser;
+            $retroUser->setUserID($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRetroUser(RetroUser $retroUser): self
+    {
+        if ($this->retroUsers->removeElement($retroUser)) {
+            // set the owning side to null (unless already changed)
+            if ($retroUser->getUserID() === $this) {
+                $retroUser->setUserID(null);
+            }
+        }
+
+        return $this;
     }
 
 

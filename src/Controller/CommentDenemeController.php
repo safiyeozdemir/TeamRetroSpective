@@ -76,5 +76,62 @@ class CommentDenemeController extends AbstractController
         return new Response(json_encode(['comment'=>$commentLike->getComment()]));
     }
 
+    /**
+     * @return Response
+     * @Route ("/comment/vote/control", name="comment_vote_control")
+     */
+    public function voteControl(RetroService $retroService, CommentRepository $commentRepository):Response
+    {
+        $retro = $retroService->findRetroLink($this->get('session')->get('meeting'));
+
+        $comments = $commentRepository->findBy(['retro' => $retro->getId(),
+                                                'commentUser' => $this->security->getUser()]);
+
+        $output = array();
+        $happyControl = false;
+        $lessControl = false;
+        $nextControl = false;
+
+
+        foreach ($comments as $comment)
+        {
+            if($comment->getCommentType() == 1)
+            {
+                $happyControl = true;
+                continue;
+            }
+
+            if($comment->getCommentType() == 2)
+            {
+                $lessControl = true;
+                continue;
+            }
+
+            if($comment->getCommentType() == 3)
+            {
+                $nextControl = true;
+                continue;
+            }
+
+
+
+
+            $output[] = array($comment->getCommentText(), $comment->getCommentType());
+        }
+
+        if(!$happyControl || !$lessControl || !$nextControl)
+        {
+            $this->addFlash('error', 'Vote Aşamasına Geçebilmeniz için Bütün Alanlar için En az Bir yorumda bulunmanız gerekmektedir.');
+        //    return "null";
+        }
+        else
+        {
+            //Tüm Alanlara Yorumda Bulunmuş İse Vote kısmına yönlendirme yapacağım.
+        }
+
+        return new Response(null);
+        //return new Response(json_encode($output));
+
+    }
 }
 

@@ -80,11 +80,21 @@ class Retro
      */
     private $step;
 
+    /**
+     * @ORM\OneToMany(targetEntity=RetroUser::class, mappedBy="retro")
+     */
+    private $retroUsers;
+
+
+
+
 
     public function __construct()
     {
         $this->comments = new ArrayCollection();
         $this->commentGroups = new ArrayCollection();
+        $this->retroUsers = new ArrayCollection();
+
 
     }
 
@@ -264,4 +274,38 @@ class Retro
 
         return $this;
     }
+
+    /**
+     * @return Collection|RetroUser[]
+     */
+    public function getRetroUsers(): Collection
+    {
+        return $this->retroUsers;
+    }
+
+    public function addRetroUser(RetroUser $retroUser): self
+    {
+        if (!$this->retroUsers->contains($retroUser)) {
+            $this->retroUsers[] = $retroUser;
+            $retroUser->setRetro($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRetroUser(RetroUser $retroUser): self
+    {
+        if ($this->retroUsers->removeElement($retroUser)) {
+            // set the owning side to null (unless already changed)
+            if ($retroUser->getRetro() === $this) {
+                $retroUser->setRetro(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+
+
 }

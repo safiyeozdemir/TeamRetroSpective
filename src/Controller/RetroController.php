@@ -6,6 +6,7 @@ use App\Entity\Retro;
 use App\Entity\User;
 use App\Form\RetroType;
 use App\Service\RetroService;
+use App\Service\RetroUserService;
 use App\Service\UserService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -30,6 +31,11 @@ class RetroController extends AbstractController
     private $retroService;
 
     /**
+     * @var RetroUserService
+     */
+    private $retroUserService;
+
+    /**
      * @var UserService
      */
     private $userService;
@@ -41,12 +47,14 @@ class RetroController extends AbstractController
 
     public function __construct(EntityManagerInterface $entityManager,
                                 RetroService $retroService,
+                                RetroUserService $retroUserService,
                                 UserService $userService,
                                 Security $security
     )
     {
         $this->entityManager = $entityManager;
         $this->retroService = $retroService;
+        $this->retroUserService = $retroUserService;
         $this->userService = $userService;
         $this->security = $security;
     }
@@ -57,9 +65,11 @@ class RetroController extends AbstractController
     public function index()
     {
         $data = $this->retroService->findUserRetro($this->security->getUser()->getId());
+        $invitedRetro = $this->retroUserService->findUserRetro($this->security->getUser()->getId());
 
         return $this->render('retro/list.html.twig',[
-            'data' => $data
+            'data' => $data,
+            'invitedRetro' => $invitedRetro,
         ]);
     }
 

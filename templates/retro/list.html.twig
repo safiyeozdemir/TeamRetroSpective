@@ -13,6 +13,7 @@
     </div>
 
     <div class="container">
+        <h3 class="table-title">Oluşturduklarım</h3>
         <table class="table">
             <thead>
             <tr>
@@ -21,6 +22,7 @@
                 <th scope="col">Retro Link</th>
                 <th scope="col">Start Date</th>
                 <th scope="col">End Date</th>
+                <th>#</th>
             </tr>
             </thead>
             <tbody>
@@ -32,9 +34,39 @@
                     <td><a href="/meeting/{{ item.retroLink }}"> {{ item.retroLink }} </a></td>
                     <td>{{ item.startDate|date('d/m/Y') }}</td>
                     <td>{{ item.endDate|date('d/m/Y') }}</td>
+                    <td><button class="btn btn-primary">Davet Et</button></td>
                 </tr>
 
                 {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+
+
+        <h3 class="table-title">Davet Edildiklerim</h3>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Retro Name</th>
+                <th scope="col">Team Name</th>
+                <th scope="col">Retro Link</th>
+                <th scope="col">Start Date</th>
+                <th scope="col">End Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in invitedRetro %}
+                {% for retro in item.getRetro() %}
+                    {{ retro.id }}
+                    <tr>
+                        <td>{{ retro.retroName }}</td>
+                        <td>{{ retro.teamName }}</td>
+                        <td><a href="/meeting/{{ retro.retroLink }}"> {{ retro.retroLink }} </a></td>
+                        <td>{{ retro.startDate|date('d/m/Y') }}</td>
+                        <td>{{ retro.endDate|date('d/m/Y') }}</td>
+                    </tr>
+                {% endfor %}
+
             {% endfor %}
             </tbody>
         </table>
