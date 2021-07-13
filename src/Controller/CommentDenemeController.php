@@ -87,7 +87,7 @@ class CommentDenemeController extends AbstractController
         $comments = $commentRepository->findBy(['retro' => $retro->getId(),
                                                 'commentUser' => $this->security->getUser()]);
 
-        $output = array();
+
         $happyControl = false;
         $lessControl = false;
         $nextControl = false;
@@ -112,25 +112,20 @@ class CommentDenemeController extends AbstractController
                 $nextControl = true;
                 continue;
             }
-
-
-
-
-            $output[] = array($comment->getCommentText(), $comment->getCommentType());
         }
 
         if(!$happyControl || !$lessControl || !$nextControl)
         {
-            $this->addFlash('error', 'Vote Aşamasına Geçebilmeniz için Bütün Alanlar için En az Bir yorumda bulunmanız gerekmektedir.');
-        //    return "null";
+            return new Response(json_encode(["error" => "Vote Aşamasına Geçebilmeniz için Bütün Alanlar için En az Bir yorumda bulunmanız gerekmektedir"]));
         }
         else
         {
-            //Tüm Alanlara Yorumda Bulunmuş İse Vote kısmına yönlendirme yapacağım.
+
+
+            return new Response(null);
         }
 
-        return new Response(null);
-        //return new Response(json_encode($output));
+      
 
     }
 }

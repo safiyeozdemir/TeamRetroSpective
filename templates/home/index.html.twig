@@ -7,17 +7,10 @@
 {% block body %}
     <div class="container">
 
-        {% for message in app.flashes('error') %}
-            <div class="alert alert-error">
-                {{ message }}
-            </div>
-        {% endfor %}
-
-
-
         <div class="btn-finish">
-        <button type="submit" class="btn btn-outline-danger" id="btn-finish">I'M FINISHED</button>
+            <button type="submit" class="btn btn-outline-danger" id="btn-finish">I'M FINISHED</button>
         </div>
+
         <table>
             <thead>
             <tr>
@@ -66,7 +59,6 @@
             <tbody>
             <tr>
                 <td class="ideas" data-topic-id="1">
-
                     {% for item in data %}
                         {% if item.commentType == 1 %}
                               {# {% for item in comments %}
@@ -75,11 +67,13 @@
                                 <section class="topic-idea"> {{ item.commentText }}  </section>
                                 {% set likeVal = 0 %}
                                 {% for comment in item.getCommentLikes() %}
-                                    {% set likeVal = loop.index %}
+                                    {% if comment.likeUser.id == app.user.id %}
+                                        {% set likeVal = likeVal + 1 %}
+                                    {% endif %}
                                 {% endfor %}
-                                <button class="idea-action-btn {{ likeVal > 0 ? 'show' : '' }}">
+                                <button class="idea-action-btn {{ likeVal > 0 ? 'show' : '' }}" {{ likeVal > 0 ? 'disabled="disabled"' : '' }}>
                                     <span id="icon"><i class="far fa-thumbs-up"></i></span>
-                                    <span id="count">{{ likeVal }}</span>
+                                    {# <span id="count">{{ likeVal }}</span>#}
                                 </button>
 
                             </div>
@@ -97,11 +91,13 @@
                             <section class="topic-idea"> {{ item.commentText }}  </section>
                             {% set likeVal = 0 %}
                             {% for comment in item.getCommentLikes() %}
-                                {% set likeVal = loop.index %}
+                                {% if comment.likeUser.id == app.user.id %}
+                                    {% set likeVal = likeVal + 1 %}
+                                {% endif %}
                             {% endfor %}
-                            <button class="idea-action-btn {{ likeVal > 0 ? 'show' : '' }}">
+                            <button class="idea-action-btn {{ likeVal > 0 ? 'show' : '' }}" {{ likeVal > 0 ? 'disabled="disabled"' : '' }}>
                                 <span id="icon"><i class="far fa-thumbs-up"></i></span>
-                                <span id="count">{{ likeVal }}</span>
+                                {#<span id="count">{{ likeVal }}</span>#}
                             </button>
                         </div>
                         {# {% endif %}
@@ -118,11 +114,13 @@
                                 <section class="topic-idea"> {{ item.commentText }} </section>
                                 {% set likeVal = 0 %}
                                 {% for comment in item.getCommentLikes() %}
-                                    {% set likeVal = loop.index %}
+                                    {% if comment.likeUser.id == app.user.id %}
+                                        {% set likeVal = likeVal + 1 %}
+                                    {% endif %}
                                 {% endfor %}
-                                <button class="idea-action-btn {{ likeVal > 0 ? 'show' : '' }}">
+                                <button class="idea-action-btn {{ likeVal > 0 ? 'show' : '' }}" {{ likeVal > 0 ? 'disabled="disabled"' : '' }}>
                                     <span id="icon"><i class="far fa-thumbs-up"></i></span>
-                                    <span id="count">{{ likeVal }}</span>
+                                    {# <span id="count">{{ likeVal }}</span>#}
                                 </button>
                             </div>
                             {# {% endif %}

@@ -341,3 +341,51 @@ table tbody tr td:nth-child(4) .topic-idea{
     top: 20px;
 
 }
+.local-message-box{
+    background-color: #e47575;
+    width: 50%;
+    margin: 0px auto;
+    text-align: center;
+    padding: 15px;
+    border-radius: 5px;
+    vertical-align: middle;
+    display: none;
+    color: #000;
+    /* align-content: center; */
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    position: absolute;
+    z-index: 99999;
+    left: 0px;
+    right: 0px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.local-message-box.show{
+    display: block;
+}
+@-webkit-keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.fadeIn {
+    -webkit-animation-name: fadeIn;
+    animation-name: fadeIn;
+}

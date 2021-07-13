@@ -22,12 +22,14 @@ $(document).ready(function(){
                         dataType: "json",
                         data: {'comment' : $(this).val(), 'commentType' : $(this).data('topic-id')},
                         success: function(response){
+                            tbodyTd.prepend('<div class="idea-content" data-comment="'+response['commentId']+'">'+
+                                '<section class="topic-idea animate__animated animate__fadeInDown">'+response['comment']+'</section>'+
+                                '<button class="idea-action-btn " >'+
+                                    '<span id="icon"><i class="far fa-thumbs-up"></i></span>'+
+                                '</button>'+
 
-                            tbodyTd.prepend(
-                                '<div class="idea-content" data-comment='+response['commentId']+'>' +
-                                        '<section class="topic-idea animate__animated animate__fadeInDown">'+response['comment']+'</section> ' +
-                                        '<button class="idea-action-btn"><i class="far fa-thumbs-up"></i></button>' +
-                                    '</div>');
+                            '</div>');
+
                             $('textarea').val('');
                         }
                     });
@@ -36,36 +38,31 @@ $(document).ready(function(){
         }
     });
 
-    $(".idea-content .idea-action-btn").click(function (e){
-
+    $('.ideas').on('click', '.idea-content .idea-action-btn', function(e) {
         $.ajax({
             url: '/comment/like',
             method: 'POST',
             dataType: "json",
             data: {'comment' : $(this).parent().data('comment') },
             success: function(response) {
-            }
+            },
         });
 
+        $(this).addClass("show");
         $(this).attr('disabled', "disabled");
-
-
     });
-
-    function actionAddClass(e)
-    {
-        $(e).addClass("show");
-    }
 
 
     $("#btn-finish").click(function (){
+        var e = $('.local-message-box .message').innerText;
         $.ajax({
             url: '/comment/vote/control',
             method: 'POST',
             dataType: "json",
             success: function(response) {
-
-
+                $('.local-message-box .message').empty().prepend(response.error);
+                $(".local-message-box").fadeIn("slow");
+                $(".local-message-box").fadeOut(5000);
             }
         });
     });
